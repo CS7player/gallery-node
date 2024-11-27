@@ -10,7 +10,12 @@ exports.login = async (req) => {
     if (result) {
       let token = generateToken(where);
       await collect.updateOne(where, { $push: { tokens: token } });
-      return { status: true, token: token, msg: "login Successfully" };
+      return {
+        status: true,
+        token: token,
+        msg: "login Successfully",
+        data: result,
+      };
     }
     return { status: false, msg: "login failed" };
   } catch {
