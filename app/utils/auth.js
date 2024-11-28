@@ -20,7 +20,6 @@ exports.auth = async (req,res,next)=>{
         req.user = data;
         next();
     } catch (error) {
-        console.error("Authentication error:", error);
         res.status(401).json({ status: false, msg: "Unauthorized access" });
     }
 }

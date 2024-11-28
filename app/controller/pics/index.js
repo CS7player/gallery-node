@@ -24,7 +24,7 @@ exports.add = async (req, res, next) => {
 
 exports.delete = async (req,res,next)=>{
  try{
-  const reqParams = req['body'] || {};
+  const reqParams = req['query'] || {};
   let result = await pics.delete(reqParams);
   res.status(200).json({ status: true, data: result });
  } catch (error) {

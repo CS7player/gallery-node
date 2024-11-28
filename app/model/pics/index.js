@@ -4,8 +4,8 @@ const { ObjectId } = require('mongodb');
 exports.details = async (req) => {
  try {
   let where = {};
-  if (req.id) {
-   where['id'] = req.id;
+  if (req._id) {
+   where['userid'] = new ObjectId(req._id);
   }
   let db = await getDb();
   let collect = db.collection(PICS);
@@ -31,7 +31,7 @@ exports.add = async (reqParams, file) => {
   let username = reqParams['username'];
   let name = reqParams['name'];
   let image = file['buffer'];
-  let params = { "username": username, "image": image ,"name": name,"id":id };
+  let params = { "username": username, "image": image ,"img_name": name,"userid":id };
   let db = await getDb();
   let collect = db.collection(PICS);
   let result = await collect.insertOne(params);
@@ -43,8 +43,7 @@ exports.add = async (reqParams, file) => {
 
 exports.delete = async (reqParams) => {
  try {
-    let where = { _id: new ObjectId(reqParams['id']) };
-  console.log(where)
+  let where = { _id: new ObjectId(reqParams['id']) };
   let db = await getDb();
   let collect = db.collection(PICS);
   let result = await collect.deleteOne(where);

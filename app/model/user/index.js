@@ -8,13 +8,14 @@ exports.login = async (req) => {
     let collect = db.collection(USERS);
     let result = await collect.findOne(where);
     if (result) {
+      where['_id'] = result['_id'];
       let token = generateToken(where);
       await collect.updateOne(where, { $push: { tokens: token } });
       return {
         status: true,
         token: token,
         msg: "login Successfully",
-        data: result,
+        data: where,
       };
     }
     return { status: false, msg: "login failed" };
@@ -71,7 +72,6 @@ exports.add = async (req) => {
 
 exports.update = async (req) => {
   try {
-    console.log(req);
     let where = { username: req["username"], email: req["email"] };
     let insert = { password: req["password"] };
     let db = await getDb();
