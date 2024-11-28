@@ -12,4 +12,8 @@ router.get('/test',(req,res,next)=>{
 
 })
 
+router.get('/',(req,res)=>{
+    res.status(200).json({status:true,msg:"working Fine!!"})
+})
+
 module.exports = router
