@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 let db;
 const URL = `mongodb+srv://${MONGO_DB_USERNAME}:${MONGO_DB_PASSWORD}@${MONGO_DB_HOST}/${MONGO_DB_COLLECTION}`
 
-const connection = async () => {
 console.log(URL);
+const connection = async () => {
  await mongoose.connect(URL)
   .then((client) => {
    console.log('Database is connected!');
