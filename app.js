@@ -3,13 +3,12 @@ const app = express();
 const cors = require('cors');
 require('./app/utils/config'); // to initallize the global variable in config file from the env file
 require('./app/utils/constants');
+const allow_origns = ALLOW_ORIGNS.split(',') || ['*']
 const corsOptions = {
  origin: (origin, callback) => {
-  console.log(ALLOW_ORIGNS);
+  console.log(allow_origns);
   console.log('origin', origin);
-
-
-  if (!origin || ALLOW_ORIGNS.includes(origin)) {
+  if (!origin || allow_origns.includes(origin)) {
    callback(null, true);
   } else {
    callback(new Error('Not allowed by CORS'));
