@@ -3,10 +3,7 @@ const { ObjectId } = require('mongodb');
 
 exports.details = async (req) => {
  try {
-  let where = {};
-  if (req._id) {
-   where['userid'] = new ObjectId(req._id);
-  }
+  let where = { 'userid' : new ObjectId(req.id) };
   let db = await getDb();
   let collect = db.collection(PICS);
   let result = await collect.find(where).toArray();

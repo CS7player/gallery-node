@@ -2,7 +2,7 @@ const pics = require('./../../model/pics');
 
 exports.details = async (req, res, next) => {
  try {
-  let result = await pics.details(req['user']);
+  let result = await pics.details(req['query']);
   res.status(200).json({ status: true, data: result });
  } catch (error) {
   res.status(500).json({ status: false, msg: error });
