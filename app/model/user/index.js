@@ -1,5 +1,6 @@
 const { getDb } = require("../../utils/db");
 const jwt = require("jsonwebtoken");
+const { ObjectId } = require('mongodb');
 
 exports.login = async (req) => {
   try {
@@ -89,6 +90,18 @@ exports.update = async (req) => {
     throw error;
   }
 };
+
+exports.details = async (req) => {
+  try {
+    let id = new ObjectId(req['id']);
+    let db = await getDb();
+    let collect = db.collection(USERS);
+    let result = await collect.find({ _id: { $ne: id } }, { tokens: 0 ,password : 0}).toArray()
+    return result;
+  } catch (error) {
+    throw error;
+  }
+}
 
 function generateToken(where) {
   let token = jwt.sign(where, SECRET_KEY);

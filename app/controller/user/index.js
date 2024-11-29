@@ -35,3 +35,12 @@ exports.update = async (req, res) => {
     res.status(500).json(error);
   }
 };
+
+exports.details = async (req,res) => {
+  try {
+    let result = await user.details(req['query']);
+    res.status(200).json({status:true,data:result})
+  } catch (error) {
+    res.status(500).json(error);
+  }
+}

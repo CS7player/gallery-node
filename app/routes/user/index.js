@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const user = require("../../controller/user");
+const { auth } = require('../../utils/auth');
 
 router.post("/login", (req, res) => {
   try {
@@ -32,4 +33,12 @@ router.put("/update", (req, res) => {
     next(error);
   }
 });
+
+router.get('/details',auth,(req,res)=>{
+  try {
+    user.details(req,res);
+  } catch (error) {
+    next(error)
+  }
+})
 module.exports = router;
