@@ -9,7 +9,6 @@ router.use('/pics',pics);
 router.get('/test',(req,res,next)=>{
     let token = jwt.sign('testing','123456')
     res.status(200).json({status:true,data:{"token":token}})
-
 })
 
 router.get('/',(req,res)=>{
